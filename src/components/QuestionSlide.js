@@ -8,7 +8,8 @@ const QuestionSlide = (props) => {
   const incorrectAnswers = props.incorrectAnswers.map(answer => {
     return answer
   })
-  const possibleAnswers = (correctAnswer + ',' + incorrectAnswers.splice(0,3)).split(',')
+  const possibleAnswers = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
+  
 
   // console.log('correctAnswer ->', correctAnswer)
   // console.log('incorrectAnswers ->', incorrectAnswers)
@@ -20,7 +21,7 @@ const QuestionSlide = (props) => {
     <div>
       <div>
         <h1>{props.question}</h1>
-        <h4>{props.correctAnswer}</h4>
+        <h4>Correct Answer: {props.correctAnswer}</h4>
         {possibleAnswers.map(answer => {
           return <button key={answer}> {answer} </button>
         })}
