@@ -38,7 +38,10 @@ const Home = () => {
               <option value="music">Music</option>
               <option value="sport_and_leisure">Sport/Leisure</option>
             </select>
-            <Link to={`/quiz/${category}`}> START GAME</Link>
+            <Link to={{
+              pathname: `/quiz/${category}`,
+              state: name,
+            }} > START GAME</Link>
           </div>
         </div>
       </div>

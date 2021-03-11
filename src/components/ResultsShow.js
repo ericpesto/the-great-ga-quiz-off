@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 const ResultsShow = (props) => {
   console.log(props)
+  const score = props.score
+  const name = props.location.state
 
 
   // ! DISPLAY SCORE
@@ -32,11 +34,11 @@ const ResultsShow = (props) => {
   return (
     <>
       <h1>Results</h1>
-      <p>Score: {props.score} </p>
-      <p>PERSONALISED MESSAGE</p>
+      <p>Score: {score} </p>
+      <p>PERSONALISED MESSAGE {name}</p>
       <Link to="/">PLAY AGAIN</Link>
     </>
   )
 }
 
-export default ResultsShow
+export default withRouter(ResultsShow)
