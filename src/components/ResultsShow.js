@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ResultsShow = () => {
+const ResultsShow = (props) => {
+  console.log(props)
 
 
   // ! DISPLAY SCORE
@@ -31,7 +32,7 @@ const ResultsShow = () => {
   return (
     <>
       <h1>Results</h1>
-      <p>SCORE HERE</p>
+      <p>Score: {props.score} </p>
       <p>PERSONALISED MESSAGE</p>
       <Link to="/">PLAY AGAIN</Link>
     </>

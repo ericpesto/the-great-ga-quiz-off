@@ -105,7 +105,7 @@ const QuizShow = () => {
     )
   } else {
     return (
-      <ResultsShow />
+      <ResultsShow score={score} />
     )
   }
 }
