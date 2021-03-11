@@ -46,7 +46,9 @@ const QuizShow = () => {
   }, [questions, questionNumber, correctAnswer, incorrectAnswers])
   
   const handleSlide = () => {
-    setQuestionNumber(questionNumber + 1)
+    setTimeout(() => {
+      setQuestionNumber(questionNumber + 1)
+    }, 2000)
   }
 
   // console.log('questions', questions)
