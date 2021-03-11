@@ -24,24 +24,29 @@ const Home = () => {
         <div>
           <div>
             <h1>The Great GA Quiz Off</h1>
-            <input
-              onChange={handleNameChange}
-              className="none"
-              value={name}
-              placeholder="Your name..."
-            />
-            <select
-              onChange={handleCategoryChange}>
-              <option value="food_and_drink">Food/Drink</option>
-              <option value="geography">Geography</option>
-              <option value="movies">Movies</option>
-              <option value="music">Music</option>
-              <option value="sport_and_leisure">Sport/Leisure</option>
-            </select>
-            <Link to={{
-              pathname: `/quiz/${category}`,
-              state: name,
-            }} > START GAME</Link>
+            <div className="ui-wrapper">
+              <div className="input-ui">
+                <input
+                  onChange={handleNameChange}
+                  className="input"
+                  value={name}
+                  placeholder="Your name..."
+                />
+                <select
+                  className="select"
+                  onChange={handleCategoryChange}>
+                  <option value="food_and_drink">Food/Drink</option>
+                  <option value="geography">Geography</option>
+                  <option value="movies">Movies</option>
+                  <option value="music">Music</option>
+                  <option value="sport_and_leisure">Sport/Leisure</option>
+                </select>
+              </div>
+              <Link className="button" to={{
+                pathname: `/quiz/${category}`,
+                state: name,
+              }} > START GAME</Link>
+            </div>
           </div>
         </div>
       </div>

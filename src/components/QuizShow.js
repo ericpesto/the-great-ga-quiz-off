@@ -83,13 +83,15 @@ const QuizShow = () => {
                   <h2>{question.question}</h2>
                   <hr />
                   {/* <h4>Correct Answer: {question.correctAnswer}</h4> */}
-                  {possibleAnswers.map((choice, index) => {
-                    return <button 
-                      key={index} 
-                      onClick={handleAnswerSelection}
-                      className="button"
-                    > {choice} </button>
-                  })}
+                  <div className="button-grid">
+                    {possibleAnswers.map((choice, index) => {
+                      return <button 
+                        key={index} 
+                        onClick={handleAnswerSelection}
+                        className="button"
+                      > {choice} </button>
+                    })}
+                  </div>
                 </div>
               </div>
             </div>

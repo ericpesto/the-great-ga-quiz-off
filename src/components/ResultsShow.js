@@ -9,7 +9,7 @@ const ResultsShow = (props) => {
 
   useEffect(() => {
     if (score >= 3) {
-      setMessage(`Ouch... ${name}`)
+      setMessage(`Ouch... ${name}...`)
     }
   
     if (score > 3 && score <= 6) {
@@ -17,7 +17,7 @@ const ResultsShow = (props) => {
     }
   
     if (score > 7) {
-      setMessage(`Nice one ${name}`)
+      setMessage(`Nice one ${name} :)`)
     }
   
     if (score === 10) {
@@ -33,7 +33,7 @@ const ResultsShow = (props) => {
       <h1>Results</h1>
       <p>Score: {score} </p>
       <p>{message}</p>
-      <Link to="/">PLAY AGAIN</Link>
+      <Link className="button" to="/">PLAY AGAIN</Link>
     </div>
   )
 }
