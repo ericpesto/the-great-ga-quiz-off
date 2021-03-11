@@ -1,23 +1,24 @@
 import React from 'react'
 
+
 const QuestionSlide = (props) => {
+  //const [score, setScore] = useState(0)
 
 
-  //need to merge correct answer w/ incorrect answers into array of possible answers
-  //need to pull only 3 incorrect answers.
+
   const correctAnswer = props.correctAnswer
   const incorrectAnswers = props.incorrectAnswers.map(answer => {
     return answer
   })
+
+  // ! RANDOMISE ARRAY
   const possibleAnswers = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
   
-  //ScoreCount Function!
+  // ! ScoreCount Function!
 
   // console.log('correctAnswer ->', correctAnswer)
   // console.log('incorrectAnswers ->', incorrectAnswers)
   // console.log('possibleAnswers ->', possibleAnswers)
-
-  // ! then have event handler for checking if answer is correct on user click
 
   const handleAnswerClick = (event) => {
     const userSelect = event.target.innerText
@@ -25,13 +26,14 @@ const QuestionSlide = (props) => {
 
     if (userSelect === correctAnswer) {
       console.log('CORRECT')
+      //VICTORY GIF HERE
+      //ADD to score
     } else {
       console.log('INCORRECT')
+      //LOSS GIF HERE
     }
 
   }
-
-
 
   return (
     <div>
@@ -43,8 +45,6 @@ const QuestionSlide = (props) => {
         })}
       </div>
       <hr/>
-      <button>NextSlide</button>
-      <hr />
     </div>
   )
 }
