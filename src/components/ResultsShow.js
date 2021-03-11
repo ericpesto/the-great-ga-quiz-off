@@ -2,6 +2,11 @@ import React from 'react'
 
 const ResultsShow = () => {
 
+
+  // ! DISPLAY SCORE
+  // ! DISPLAY PERSONALISED COMMENT
+  // ! PLAY AGAIN BUTTON
+
   // const displayScore = () => {
   // //   // let startScore = 0
   // //   // startScore += 1
