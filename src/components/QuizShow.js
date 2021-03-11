@@ -14,6 +14,7 @@ const QuizShow = () => {
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [incorrectAnswers, setIncorrectAnswers] = useState([])
   const [possibleAnswers, setPossibleAnswers] = useState([])
+  const [score, setScore] = useState(0)
   
   const params = useParams()
   const history = useHistory()
@@ -28,15 +29,14 @@ const QuizShow = () => {
     getData()
   }, [])
 
-  const shuffleAnswers = () => {
-    return 0.5 - Math.random()
-  }
-
   useEffect(() => {
     if (!questions) return 
     setCorrectAnswer(questions[questionNumber].correctAnswer)
     setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
     const possibleAnswersArray = (questions[questionNumber].correctAnswer + ',' + questions[questionNumber].incorrectAnswers.slice(0,3)).split(',')
+    const shuffleAnswers = () => {
+      return 0.5 - Math.random()
+    }
     const shuffledAnswersArray = possibleAnswersArray.sort(shuffleAnswers)
     setPossibleAnswers(shuffledAnswersArray)
   }, [questions, questionNumber, incorrectAnswers])
@@ -62,8 +62,11 @@ const QuizShow = () => {
       console.log('CORRECT')
       //VICTORY GIF HERE
       // ? ADD to score
+      setScore(score + 1)
+      handleSlide()
     } else {
       console.log('INCORRECT')
+      handleSlide()
       // ? LOSS GIF HERE
     }
   }
@@ -76,6 +79,7 @@ const QuizShow = () => {
         if (questionNumber === index) {
           return  <div key={index}> 
             <p>{index + 1}/10</p>
+            <p>score: {score}</p>
             <div>
               <div>
                 <h1>{question.question}</h1>
@@ -92,7 +96,7 @@ const QuizShow = () => {
           </div>
         }
       })}
-      <button onClick={handleSlide}>NEXT Q</button>
+      {/* <button onClick={handleSlide}>NEXT Q</button> */}
     </>
   )
 }
