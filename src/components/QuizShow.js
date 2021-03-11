@@ -19,13 +19,16 @@ const QuizShow = () => {
   const [score, setScore] = useState(0)
   
   const params = useParams()
-
   console.log('params ->', params)
 
   useEffect(() => {
     const getData = async() => {
-      const response = await axios.get(`https://trivia.willfry.co.uk/api/questions?categories=${params.category}&limit=11`)
-      setQuestions(response.data)
+      try {
+        const response = await axios.get(`https://trivia.willfry.co.uk/api/questions?categories=${params.category}&limit=11`)
+        setQuestions(response.data)
+      } catch (err) {
+        console.log(err)
+      }
     }
     getData()
   }, [])
@@ -68,7 +71,7 @@ const QuizShow = () => {
     }
   }
 
-  if (!questions) return null
+  if (!questions) return <p className="wrapper">loading...</p>
   if (questionNumber < 10) {
     return (
       <div className="wrapper">
