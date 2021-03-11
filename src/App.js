@@ -1,7 +1,11 @@
 import React from 'react'
+import QuizShow from './components/QuizShow'
 
-function App() {
-  return <h1>Hello Eric</h1>
+const App = () => {
+  return (
+    <QuizShow />
+  )
+
 }
 
 export default App
