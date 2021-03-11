@@ -5,7 +5,7 @@ import axios from 'axios'
 //import QuestionSlide from './QuestionSlide'
 
 const QuizShow = () => {
-  const [questions, setQuestions] = useState([])
+  const [questions, setQuestions] = useState(null)
   const [questionNumber, setQuestionNumber] = useState(0)
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [incorrectAnswers, setIncorrectAnswers] = useState([])
@@ -24,24 +24,34 @@ const QuizShow = () => {
     getData()
   }, [])
 
+
+  useEffect(() => {
+    if (!questions) return 
+    setCorrectAnswer(questions[questionNumber].correctAnswer)
+    setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
+    // ! Randomise Array and account for numbers
+    //const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
+    const possibleAnswersArray = (questions[questionNumber].correctAnswer + ',' + questions[questionNumber].incorrectAnswers).split(',')
+    setPossibleAnswers(possibleAnswersArray)
+  }, [questions, questionNumber, incorrectAnswers])
+
   
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
     if (questionNumber >= 9) {
       history.push('/quiz/results')
     }
-    setCorrectAnswer(questions[questionNumber].correctAnswer)
-    setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
-    // ! Randomise Array
-    const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
-    setPossibleAnswers(possibleAnswersArray)
+    // setCorrectAnswer(questions[questionNumber].correctAnswer)
+    // setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
+    // const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
+    // setPossibleAnswers(possibleAnswersArray)
   }
 
-  console.log('questions', questions)
-  console.log('questionNumber', questionNumber)
-  console.log('correctAnswer', correctAnswer)
-  console.log('incorrectAnswers', incorrectAnswers)
-  console.log('possibleAnswers', possibleAnswers)
+  // console.log('questions', questions)
+  // console.log('questionNumber', questionNumber)
+  // console.log('correctAnswer', correctAnswer)
+  // console.log('incorrectAnswers', incorrectAnswers)
+  // console.log('possibleAnswers', possibleAnswers)
 
 
   const handleAnswerSelection = (event) => {
@@ -58,6 +68,7 @@ const QuizShow = () => {
     }
   }
 
+  if (!questions) return null
   return (
     <>
       <h2>QuizShow</h2>
