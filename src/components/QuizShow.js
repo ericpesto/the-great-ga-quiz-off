@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import QuestionSlide from './QuestionSlide'
@@ -10,6 +10,7 @@ const QuizShow = () => {
   
 
   const params = useParams()
+  const history = useHistory()
 
   console.log('params ->', params)
 
@@ -28,6 +29,9 @@ const QuizShow = () => {
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
     //if questionNumber > 10 , useHistroy to push ResultsShow
+    if (questionNumber >= 9) {
+      history.push('/quiz/results')
+    }
   }
 
   console.log('questionNumber', questionNumber)
@@ -41,7 +45,10 @@ const QuizShow = () => {
         //pass through props?
         console.log('index', index)
         if (questionNumber === index) {
-          return <QuestionSlide key={index} {...question} />
+          return  <> 
+            <p>{index + 1}/10</p>
+            <QuestionSlide key={index} {...question} />
+          </>
         }
       })}
       <button onClick={handleSlide}>NEXT Q</button>
