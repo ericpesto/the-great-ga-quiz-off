@@ -32,22 +32,30 @@ const Home = () => {
 
   return (
     <>
-      <h2>The Great GA Quiz Off</h2>
-      <input
-        onChange={handleNameChange}
-        className="none"
-        value={name}
-        placeholder="Your name..."
-      />
-      <select
-        onChange={handleCategoryChange}>
-        <option value="food_and_drink">Food/Drink</option>
-        <option value="geography">Geography</option>
-        <option value="movies">Movies</option>
-        <option value="music">Music</option>
-        <option value="sport_and_leisure">Sport/Leisure</option>
-      </select>
-      <Link to={`/quiz/${category}`}> START GAME</Link>
+      <div className="container">
+        <div>
+          <div>
+            <h2>The Great GA Quiz Off</h2>
+            <input
+              onChange={handleNameChange}
+              className="none"
+              value={name}
+              placeholder="Your name..."
+            />
+            <select
+              onChange={handleCategoryChange}>
+              <option value="food_and_drink">Food/Drink</option>
+              <option value="geography">Geography</option>
+              <option value="movies">Movies</option>
+              <option value="music">Music</option>
+              <option value="sport_and_leisure">Sport/Leisure</option>
+            </select>
+            <Link to={`/quiz/${category}`}> START GAME</Link>
+          </div>
+        </div>
+
+      </div>
+      
 
 
     </>

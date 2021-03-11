@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-import QuestionSlide from './QuestionSlide'
+//import QuestionSlide from './QuestionSlide'
 
 const QuizShow = () => {
   const [questions, setQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0)
+  const [correctAnswer, setCorrectAnswer] = useState('')
+  const [incorrectAnswers, setIncorrectAnswers] = useState([])
+  const [possibleAnswers, setPossibleAnswers] = useState([])
   
-
   const params = useParams()
   const history = useHistory()
 
@@ -21,34 +23,66 @@ const QuizShow = () => {
     }
     getData()
   }, [])
-
-  //console.log(questions)
-
-  // every time the user clock a next button the question number state inceases by 1, this tking them to the next question in the array.
-
+  
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
-    //if questionNumber > 10 , useHistroy to push ResultsShow
     if (questionNumber >= 9) {
       history.push('/quiz/results')
     }
+
+    setCorrectAnswer(questions[questionNumber].correctAnswer)
+    setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
+    // ! RANDOMISE ARRAY
+    const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
+    setPossibleAnswers(possibleAnswersArray)
   }
 
-  console.log('questionNumber', questionNumber)
+  console.log('correctAnswer', correctAnswer)
+  console.log('incorrectAnswers', incorrectAnswers)
+  console.log('possibleAnswers', possibleAnswers)
+  
 
+  // const correctAnswer = questions[questionNumber].correctAnswer
+  // const incorrectAnswers = questions[questionNumber].incorrectAnswers.map(answer => {
+  //   return answer
+  // })
 
+  const handleAnswerSelection = (event) => {
+    const userSelect = event.target.innerText
+    console.log('userSelect', userSelect)
+
+    if (userSelect === correctAnswer) {
+      console.log('CORRECT')
+      //VICTORY GIF HERE
+      // ? ADD to score
+    } else {
+      console.log('INCORRECT')
+      // ? LOSS GIF HERE
+    }
+  }
 
   return (
     <>
       <h2>QuizShow</h2>
       {questions.map((question, index) => {
-        //pass through props?
-        console.log('index', index)
         if (questionNumber === index) {
-          return  <> 
+          return  <div key={index}> 
             <p>{index + 1}/10</p>
-            <QuestionSlide key={index} {...question} />
-          </>
+            <div>
+              <div>
+                <h1>{question.question}</h1>
+                <h4>Correct Answer: {question.correctAnswer}</h4>
+                {possibleAnswers.map((answer, index) => {
+                  return <button 
+                    key={index} 
+                    onClick={handleAnswerSelection}
+                  > {answer} </button>
+                })}
+              </div>
+              <hr/>
+            </div>
+          </div>
+
         }
       })}
       <button onClick={handleSlide}>NEXT Q</button>
