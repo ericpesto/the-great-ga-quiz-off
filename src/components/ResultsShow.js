@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ResultsShow = () => {
 
@@ -28,7 +29,12 @@ const ResultsShow = () => {
   // }
 
   return (
-    <h2>Results</h2>
+    <>
+      <h1>Results</h1>
+      <p>SCORE HERE</p>
+      <p>PERSONALISED MESSAGE</p>
+      <Link to="/">PLAY AGAIN</Link>
+    </>
   )
 }
 

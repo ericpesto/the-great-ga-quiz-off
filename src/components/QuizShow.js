@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
+
 // ! HANDLE ANSWER CHOICE, display next Q button only if correct answer is chosen
 // ! if correct button chosen, display next Q button, add to score, show gif, make correct button green and incorrect buttons red
 // ! if inccorect button chosen, display next Q, show correct button in greena n rest in red
@@ -43,8 +44,9 @@ const QuizShow = () => {
   
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
-    if (questionNumber > 8) {
-      history.push('/quiz/results')
+
+    if (questionNumber >= 9) {
+      history.push('/quiz/results') 
     }
   }
 
