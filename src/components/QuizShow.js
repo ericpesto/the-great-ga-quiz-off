@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import ResultsShow from './ResultsShow'
 
 
 // ! HANDLE ANSWER CHOICE, display next Q button only if correct answer is chosen
@@ -18,13 +19,13 @@ const QuizShow = () => {
   const [score, setScore] = useState(0)
   
   const params = useParams()
-  const history = useHistory()
+  // const history = useHistory()
 
   console.log('params ->', params)
 
   useEffect(() => {
     const getData = async() => {
-      const response = await axios.get(`https://trivia.willfry.co.uk/api/questions?categories=${params.category}&limit=10`)
+      const response = await axios.get(`https://trivia.willfry.co.uk/api/questions?categories=${params.category}&limit=11`)
       setQuestions(response.data)
     }
     getData()
@@ -45,9 +46,9 @@ const QuizShow = () => {
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
 
-    if (questionNumber >= 9) {
-      history.push('/quiz/results') 
-    }
+    // if (questionNumber >= 9) {
+    //   history.push('/quiz/results') 
+    // }
   }
 
   console.log('questions', questions)
@@ -74,33 +75,39 @@ const QuizShow = () => {
   }
 
   if (!questions) return null
-  return (
-    <>
-      <h2>QuizShow</h2>
-      {questions.map((question, index) => {
-        if (questionNumber === index) {
-          return  <div key={index}> 
-            <p>{index + 1}/10</p>
-            <p>score: {score}</p>
-            <div>
+  if (questionNumber < 10) {
+    return (
+      <>
+        <h2>QuizShow</h2>
+        {questions.map((question, index) => {
+          if (questionNumber === index) {
+            return  <div key={index}> 
+              <p>{index + 1}/10</p>
+              <p>score: {score}</p>
               <div>
-                <h1>{question.question}</h1>
-                <h4>Correct Answer: {question.correctAnswer}</h4>
-                {possibleAnswers.map((choice, index) => {
-                  return <button 
-                    key={index} 
-                    onClick={handleAnswerSelection}
-                  > {choice} </button>
-                })}
+                <div>
+                  <h1>{question.question}</h1>
+                  <h4>Correct Answer: {question.correctAnswer}</h4>
+                  {possibleAnswers.map((choice, index) => {
+                    return <button 
+                      key={index} 
+                      onClick={handleAnswerSelection}
+                    > {choice} </button>
+                  })}
+                </div>
+                <hr/>
               </div>
-              <hr/>
             </div>
-          </div>
-        }
-      })}
-      {/* <button onClick={handleSlide}>NEXT Q</button> */}
-    </>
-  )
+          }
+        })}
+        {/* <button onClick={handleSlide}>NEXT Q</button> */}
+      </>
+    )
+  } else {
+    return (
+      <ResultsShow />
+    )
+  }
 }
 
 export default QuizShow
