@@ -3,12 +3,12 @@ import React from 'react'
 const QuestionSlide = (props) => {
 
   //need to merge correct answer w/ incorrect answers into array of possible answers
-
+  //need to pull only 3 incorrect answers.
   const correctAnswer = props.correctAnswer
   const incorrectAnswers = props.incorrectAnswers.map(answer => {
     return answer
   })
-  const possibleAnswers = (correctAnswer + ',' + incorrectAnswers).split(',')
+  const possibleAnswers = (correctAnswer + ',' + incorrectAnswers.splice(0,3)).split(',')
 
   // console.log('correctAnswer ->', correctAnswer)
   // console.log('incorrectAnswers ->', incorrectAnswers)
@@ -20,7 +20,7 @@ const QuestionSlide = (props) => {
     <div>
       <div>
         <h1>{props.question}</h1>
-        {/* <h4>{props.correctAnswer}</h4> */}
+        <h4>{props.correctAnswer}</h4>
         {possibleAnswers.map(answer => {
           return <button key={answer}> {answer} </button>
         })}

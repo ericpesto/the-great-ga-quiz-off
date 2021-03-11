@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [name, setName] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('food_and_drink')
 
   
   //handle change function here that lnks to the form's input feild and category
@@ -37,6 +37,7 @@ const Home = () => {
         onChange={handleNameChange}
         className="none"
         value={name}
+        placeholder="Your name..."
       />
       <select
         onChange={handleCategoryChange}>
