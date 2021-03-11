@@ -19,7 +19,6 @@ const QuizShow = () => {
   const [score, setScore] = useState(0)
   
   const params = useParams()
-  // const history = useHistory()
 
   console.log('params ->', params)
 
@@ -41,21 +40,17 @@ const QuizShow = () => {
     }
     const shuffledAnswersArray = possibleAnswersArray.sort(shuffleAnswers)
     setPossibleAnswers(shuffledAnswersArray)
-  }, [questions, questionNumber, incorrectAnswers])
+  }, [questions, questionNumber, correctAnswer, incorrectAnswers])
   
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
-
-    // if (questionNumber >= 9) {
-    //   history.push('/quiz/results') 
-    // }
   }
 
-  console.log('questions', questions)
-  console.log('questionNumber', questionNumber)
-  console.log('correctAnswer', correctAnswer)
-  console.log('incorrectAnswers', incorrectAnswers)
-  console.log('possibleAnswers', possibleAnswers)
+  // console.log('questions', questions)
+  // console.log('questionNumber', questionNumber)
+  // console.log('correctAnswer', correctAnswer)
+  // console.log('incorrectAnswers', incorrectAnswers)
+  // console.log('possibleAnswers', possibleAnswers)
 
   const handleAnswerSelection = (event) => {
     const userSelect = event.target.innerText
@@ -63,22 +58,20 @@ const QuizShow = () => {
 
     if (userSelect === correctAnswer) {
       console.log('CORRECT')
-      //VICTORY GIF HERE
-      // ? ADD to score
+      // ! VICTORY GIF HERE
       setScore(score + 1)
       handleSlide()
     } else {
       console.log('INCORRECT')
       handleSlide()
-      // ? LOSS GIF HERE
+      // ! LOSS GIF HERE
     }
   }
 
   if (!questions) return null
   if (questionNumber < 10) {
     return (
-      <>
-        <h2>QuizShow</h2>
+      <div className="wrapper">
         {questions.map((question, index) => {
           if (questionNumber === index) {
             return  <div key={index}> 
@@ -86,22 +79,23 @@ const QuizShow = () => {
               <p>score: {score}</p>
               <div>
                 <div>
-                  <h1>{question.question}</h1>
-                  <h4>Correct Answer: {question.correctAnswer}</h4>
+                  <hr />
+                  <h2>{question.question}</h2>
+                  <hr />
+                  {/* <h4>Correct Answer: {question.correctAnswer}</h4> */}
                   {possibleAnswers.map((choice, index) => {
                     return <button 
                       key={index} 
                       onClick={handleAnswerSelection}
+                      className="button"
                     > {choice} </button>
                   })}
                 </div>
-                <hr/>
               </div>
             </div>
           }
         })}
-        {/* <button onClick={handleSlide}>NEXT Q</button> */}
-      </>
+      </div>
     )
   } else {
     return (

@@ -20,10 +20,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="wrapper">
         <div>
           <div>
-            <h2>The Great GA Quiz Off</h2>
+            <h1>The Great GA Quiz Off</h1>
             <input
               onChange={handleNameChange}
               className="none"

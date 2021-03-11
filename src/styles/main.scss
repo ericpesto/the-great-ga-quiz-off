@@ -1,1 +1,21 @@
 @import '~bulma/bulma.sass';
+
+body {
+  font-family: 'Oxygen', sans-serif;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+.wrapper {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
