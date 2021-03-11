@@ -24,35 +24,31 @@ const QuizShow = () => {
     getData()
   }, [])
 
+  const shuffleAnswers = () => {
+    return 0.5 - Math.random()
+  }
 
   useEffect(() => {
     if (!questions) return 
     setCorrectAnswer(questions[questionNumber].correctAnswer)
     setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
-    // ! Randomise Array and account for numbers
-    //const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
-    const possibleAnswersArray = (questions[questionNumber].correctAnswer + ',' + questions[questionNumber].incorrectAnswers).split(',')
-    setPossibleAnswers(possibleAnswersArray)
+    const possibleAnswersArray = (questions[questionNumber].correctAnswer + ',' + questions[questionNumber].incorrectAnswers.slice(0,3)).split(',')
+    const shuffledAnswersArray = possibleAnswersArray.sort(shuffleAnswers)
+    setPossibleAnswers(shuffledAnswersArray)
   }, [questions, questionNumber, incorrectAnswers])
-
   
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
-    if (questionNumber >= 9) {
+    if (questionNumber > 8) {
       history.push('/quiz/results')
     }
-    // setCorrectAnswer(questions[questionNumber].correctAnswer)
-    // setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
-    // const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
-    // setPossibleAnswers(possibleAnswersArray)
   }
 
-  // console.log('questions', questions)
-  // console.log('questionNumber', questionNumber)
-  // console.log('correctAnswer', correctAnswer)
-  // console.log('incorrectAnswers', incorrectAnswers)
-  // console.log('possibleAnswers', possibleAnswers)
-
+  console.log('questions', questions)
+  console.log('questionNumber', questionNumber)
+  console.log('correctAnswer', correctAnswer)
+  console.log('incorrectAnswers', incorrectAnswers)
+  console.log('possibleAnswers', possibleAnswers)
 
   const handleAnswerSelection = (event) => {
     const userSelect = event.target.innerText

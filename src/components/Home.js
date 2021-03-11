@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom'
 const Home = () => {
   const [name, setName] = useState('')
   const [category, setCategory] = useState('food_and_drink')
-
-  
-  //handle change function here that lnks to the form's input feild and category
   
   const handleNameChange = (event) => {
     const userName = event.target.value
@@ -20,15 +17,6 @@ const Home = () => {
     setCategory(categorySelect)
   }
   console.log('category', category)
-
-
-  // ! need to make sure cateogries options values are correct so when we usePArams for the api call it gets the right data
-  
-
-
-  // const gameStart = () => {
-  //   console.log(gameStart)
-  // }
 
   return (
     <>
@@ -53,11 +41,7 @@ const Home = () => {
             <Link to={`/quiz/${category}`}> START GAME</Link>
           </div>
         </div>
-
       </div>
-      
-
-
     </>
   )
 }

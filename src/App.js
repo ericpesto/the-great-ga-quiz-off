@@ -13,11 +13,11 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/quiz/:category">
-          <QuizShow />
-        </Route>
         <Route path="/quiz/results">
           <ResultsShow />
+        </Route>
+        <Route path="/quiz/:category">
+          <QuizShow />
         </Route>
       </Switch>
     </BrowserRouter>
