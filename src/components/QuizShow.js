@@ -23,29 +23,26 @@ const QuizShow = () => {
     }
     getData()
   }, [])
+
   
   const handleSlide = () => {
     setQuestionNumber(questionNumber + 1)
     if (questionNumber >= 9) {
       history.push('/quiz/results')
     }
-
     setCorrectAnswer(questions[questionNumber].correctAnswer)
     setIncorrectAnswers(questions[questionNumber].incorrectAnswers)
-    // ! RANDOMISE ARRAY
+    // ! Randomise Array
     const possibleAnswersArray = (correctAnswer + ',' + incorrectAnswers.slice(0,3)).split(',')
     setPossibleAnswers(possibleAnswersArray)
   }
 
+  console.log('questions', questions)
+  console.log('questionNumber', questionNumber)
   console.log('correctAnswer', correctAnswer)
   console.log('incorrectAnswers', incorrectAnswers)
   console.log('possibleAnswers', possibleAnswers)
-  
 
-  // const correctAnswer = questions[questionNumber].correctAnswer
-  // const incorrectAnswers = questions[questionNumber].incorrectAnswers.map(answer => {
-  //   return answer
-  // })
 
   const handleAnswerSelection = (event) => {
     const userSelect = event.target.innerText
@@ -72,17 +69,16 @@ const QuizShow = () => {
               <div>
                 <h1>{question.question}</h1>
                 <h4>Correct Answer: {question.correctAnswer}</h4>
-                {possibleAnswers.map((answer, index) => {
+                {possibleAnswers.map((choice, index) => {
                   return <button 
                     key={index} 
                     onClick={handleAnswerSelection}
-                  > {answer} </button>
+                  > {choice} </button>
                 })}
               </div>
               <hr/>
             </div>
           </div>
-
         }
       })}
       <button onClick={handleSlide}>NEXT Q</button>
