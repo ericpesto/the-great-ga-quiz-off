@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import ResultsShow from './ResultsShow'
 
+import CorrectGIF from '../assets/celebration-emoji.gif'
+import IncorrectGIF from '../assets/scared-3.gif'
+
 
 // ! HANDLE ANSWER CHOICE, display next Q button only if correct answer is chosen
 // ! if correct button chosen, display next Q button, add to score, show gif, make correct button green and incorrect buttons red
@@ -17,6 +20,10 @@ const QuizShow = () => {
   const [incorrectAnswers, setIncorrectAnswers] = useState([])
   const [possibleAnswers, setPossibleAnswers] = useState([])
   const [score, setScore] = useState(0)
+  const [isCorrect, setIsCorrect] = useState(false)
+  const [showIsIncorrect, setIsIncorrect] = useState(false)
+
+  //state (isCorect, ect...)Boolean. if true show (isCoorect && .... show that image)
   
   const params = useParams()
   console.log('params ->', params)
@@ -47,8 +54,10 @@ const QuizShow = () => {
   
   const handleSlide = () => {
     setTimeout(() => {
+      setIsCorrect(false)
+      setIsIncorrect(false)
       setQuestionNumber(questionNumber + 1)
-    }, 500)
+    }, 1500)
   }
 
   // console.log('questions', questions)
@@ -64,47 +73,68 @@ const QuizShow = () => {
     if (userSelect === correctAnswer) {
       console.log('CORRECT')
       // ! VICTORY GIF HERE
+      setIsCorrect(true)
+      setIsIncorrect(false)
       setScore(score + 1)
       handleSlide()
     } else {
       console.log('INCORRECT')
       handleSlide()
       // ! LOSS GIF HERE
+      setIsIncorrect(true)
+      setIsCorrect(false)
+      // setShowIncorrect(true)
     }
   }
 
-  if (!questions) return <p className="wrapper">loading...</p>
+  // const correctAnswerGIF = () => {
+
+  // }
+
+
+  // const incorrectAnswerGIF = () => {
+    
+  // }
+
+  //
+  
+
+  if (!questions) return <p className="wrapper" id="loading">loading...</p>
   if (questionNumber < 10) {
     return (
-      <div className="wrapper">
-        <div className="question-card">
-          {questions.map((question, index) => {
-            if (questionNumber === index) {
-              return  <div key={index}> 
-                <p>{index + 1}/10</p>
-                <p>score: {score}</p>
-                <div>
+      <div id="background-quiz"> 
+        <div className="wrapper">
+          <div className="question-card">
+            {questions.map((question, index) => {
+              if (questionNumber === index) {
+                return  <div key={index}> 
+                  <p>{index + 1}/10</p>
+                  <p>score: {score}</p>
                   <div>
-                    <hr />
-                    <h2>{question.question}</h2>
-                    <hr />
-                    {/* <h4>Correct Answer: {question.correctAnswer}</h4> */}
-                    <div className="button-grid">
-                      {possibleAnswers.map((choice, index) => {
-                        return <button 
-                          key={index} 
-                          onClick={handleAnswerSelection}
-                          className="button"
-                          id="start-button"
-                        > {choice} </button>
-                      })}
+                    <div>
+                      <hr />
+                      <h2>{question.question}</h2>
+                      <hr />
+                      {showIsIncorrect && <h4 id="correct-answer">Correct Answer: {question.correctAnswer}</h4> }
+                      <div className="button-grid">
+                        {possibleAnswers.map((choice, index) => {
+                          return <button 
+                            key={index} 
+                            onClick={handleAnswerSelection}
+                            className="button"
+                            id="start-button"
+                          > {choice} </button>
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            }
-          })}
-        </div>     
+              }
+            })}
+            {isCorrect && <img className="correct-gif" src={CorrectGIF} /> }
+            {showIsIncorrect && <img className="incorrect-gif" src={IncorrectGIF} /> }
+          </div>     
+        </div>
       </div>
     )
   } else {
