@@ -61,6 +61,7 @@ const ResultsShow = (props) => {
           <div className="results-ui-wrapper">
             <h2>{message}</h2>
             <p id="final-score">Final Score: {score} </p>
+            <hr />
             <Link className="button" id="start-button" to="/">PLAY AGAIN</Link>
           </div>
         </div>  
