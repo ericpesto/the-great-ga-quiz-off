@@ -9,26 +9,6 @@ const ResultsShow = (props) => {
 
   console.log('name', name)
   console.log('score', score)
- 
-  
-  // if (score >= 3) {
-  //   setMessage(`Ouch... ${name}... try again?`)
-  // }
-
-  // if (score > 3 && score <= 6) {
-  //   setMessage(`Not bad ${name}, but better luck next time...`)
-  // }
-
-  // if (score > 7) {
-  //   setMessage(`Nice one ${name}! :)`)
-  // }
-
-  // if (score === 10) {
-  //   setMessage(`Wow ${name}, nerd status`)
-  // }
-
-  // console.log('message->', message)
-  
 
   useEffect(() => {
 
