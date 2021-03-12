@@ -21,7 +21,7 @@ const QuizShow = () => {
   const [possibleAnswers, setPossibleAnswers] = useState([])
   const [score, setScore] = useState(0)
   const [isCorrect, setIsCorrect] = useState(false)
-  const [showIsIncorrect, setIsIncorrect] = useState(false)
+  const [isIncorrect, setIsIncorrect] = useState(false)
 
   //state (isCorect, ect...)Boolean. if true show (isCoorect && .... show that image)
   
@@ -57,7 +57,7 @@ const QuizShow = () => {
       setIsCorrect(false)
       setIsIncorrect(false)
       setQuestionNumber(questionNumber + 1)
-    }, 1500)
+    }, 1800)
   }
 
   // console.log('questions', questions)
@@ -115,7 +115,7 @@ const QuizShow = () => {
                       <hr />
                       <h2>{question.question}</h2>
                       <hr />
-                      {showIsIncorrect && <h4 id="correct-answer">Correct Answer: {question.correctAnswer}</h4> }
+                      {isIncorrect && <h4 id="correct-answer">Correct Answer: {question.correctAnswer}</h4> }
                       <div className="button-grid">
                         {possibleAnswers.map((choice, index) => {
                           return <button 
@@ -132,7 +132,7 @@ const QuizShow = () => {
               }
             })}
             {isCorrect && <img className="correct-gif" src={CorrectGIF} /> }
-            {showIsIncorrect && <img className="incorrect-gif" src={IncorrectGIF} /> }
+            {isIncorrect && <img className="incorrect-gif" src={IncorrectGIF} /> }
           </div>     
         </div>
       </div>
