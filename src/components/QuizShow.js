@@ -48,7 +48,7 @@ const QuizShow = () => {
   const handleSlide = () => {
     setTimeout(() => {
       setQuestionNumber(questionNumber + 1)
-    }, 2000)
+    }, 500)
   }
 
   // console.log('questions', questions)
@@ -77,31 +77,34 @@ const QuizShow = () => {
   if (questionNumber < 10) {
     return (
       <div className="wrapper">
-        {questions.map((question, index) => {
-          if (questionNumber === index) {
-            return  <div key={index}> 
-              <p>{index + 1}/10</p>
-              <p>score: {score}</p>
-              <div>
+        <div className="question-card">
+          {questions.map((question, index) => {
+            if (questionNumber === index) {
+              return  <div key={index}> 
+                <p>{index + 1}/10</p>
+                <p>score: {score}</p>
                 <div>
-                  <hr />
-                  <h2>{question.question}</h2>
-                  <hr />
-                  {/* <h4>Correct Answer: {question.correctAnswer}</h4> */}
-                  <div className="button-grid">
-                    {possibleAnswers.map((choice, index) => {
-                      return <button 
-                        key={index} 
-                        onClick={handleAnswerSelection}
-                        className="button"
-                      > {choice} </button>
-                    })}
+                  <div>
+                    <hr />
+                    <h2>{question.question}</h2>
+                    <hr />
+                    {/* <h4>Correct Answer: {question.correctAnswer}</h4> */}
+                    <div className="button-grid">
+                      {possibleAnswers.map((choice, index) => {
+                        return <button 
+                          key={index} 
+                          onClick={handleAnswerSelection}
+                          className="button"
+                          id="start-button"
+                        > {choice} </button>
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          }
-        })}
+            }
+          })}
+        </div>     
       </div>
     )
   } else {

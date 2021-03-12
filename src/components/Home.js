@@ -19,7 +19,7 @@ const Home = () => {
   console.log('category', category)
 
   return (
-    <>
+    <div id="background">
       <div className="wrapper">
         <div>
           <div>
@@ -42,7 +42,7 @@ const Home = () => {
                   <option value="sport_and_leisure">Sport/Leisure</option>
                 </select>
               </div>
-              <Link className="button" to={{
+              <Link className="button" id="start-button" to={{
                 pathname: `/quiz/${category}`,
                 state: name,
               }} > START GAME</Link>
@@ -50,7 +50,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
